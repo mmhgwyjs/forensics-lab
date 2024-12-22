@@ -23,7 +23,8 @@
 | **SBECmd**                    | ShellBags Explorer, command line edition.                                               |                                               |
 | **ShellBags Explorer**        | GUI for browsing shellbags data; handles locked files.                                   |                                               |
 | **[SQLECmd](https://github.com/EricZimmerman/SQLECmd)**                   | Process SQLite files with custom maps.                                                  | `SQLECmd.exe -f "C:\Temp\someFile.db" --csv "c:\temp\out"` <br> `SQLECmd.exe -d "C:\Temp\" --csv "c:\temp\out"` <br> `SQLECmd.exe -d "C:\Temp\" --hunt --csv "c:\temp\out"` |
-| **SrumECmd**                  | Process SRUDB.dat for network, process, and energy info.                                 |                                               |
+| **SrumECmd**                  | Process SRUDB.dat for network, process, and energy info.                                 | C:\Users\<username>\Desktop\Tools\Forensic\SrumECmd.exe -f C:\Users\<username>\Documents\<path>\SRUDB.dat --csv C:\Users\<username>\Documents\<path>
+                                              |
 | **SumECmd**                   | Process Microsoft User Access Logs.                                                      |                                               |
 | **Timeline Explorer**         | View CSV and Excel files with filtering and sorting.                                     |                                               |
 | **VSCMount**                  | Mount all Volume Shadow Copies (VSCs) to a drive letter.                                 |                                               |
