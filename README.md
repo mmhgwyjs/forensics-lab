@@ -8,7 +8,63 @@ To create a space for exploring digital forensics and memory analysis, enabling 
 
 ## Initial Setup
 
-For this lab, we will be using the `SIFT Workstation` from SANS.
+***1. Installing hypervisor.***
+   
+- You can use VMware Workstation or VirtualBox, based on your preference. More details [here](https://github.com/mmhgwyjs/homelab?tab=readme-ov-file#hypervisor).
+
+***2. Spinning up a Windows machine.***
+
+- you can check the steps here. https://github.com/mmhgwyjs/windows-lab?tab=readme-ov-file#initial-setup
+
+***3. Enabling Windows Subsystem for Linux (WSL) and Installing Ubuntu.***
+
+for windows server
+
+https://docs.microsoft.com/en-us/windows/wsl/install-on-server
+
+- in powershell, Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+- restart
+- download a linux distro: https://learn.microsoft.com/en-us/windows/wsl/install-manual#downloading-distributions
+- rename the downloaded .appx then extract it
+- run Add-AppxPackage .\app_name.appx
+  ![image](https://github.com/user-attachments/assets/4b07aaff-59f3-49d0-bb25-ef2d635077f5)
+- run ubuntu, wait for it to be completed
+  ![image](https://github.com/user-attachments/assets/245d2e43-02b1-4f60-9e3f-a9e155ec08f7)
+- setup username and password
+
+for windows client
+
+- in powershell, dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+- restart
+- open microsoft store, search Ubuntu 20.04.6 and Install
+  ![image](https://github.com/user-attachments/assets/3b1b59f3-936b-460e-9036-0cad422d34d4)
+- Open Ubuntu
+  ![image](https://github.com/user-attachments/assets/90390394-1134-4d51-ac4c-69751b29cd5f)
+- setup username and password
+  ![image](https://github.com/user-attachments/assets/254cfeba-1d2a-470d-87a8-73d2cc5a6841)
+- completed
+  ![image](https://github.com/user-attachments/assets/53ddfc0c-3cd3-41b3-9295-5756e3f8d38c)
+
+### optional configuration
+
+- set the timezone to UTC
+- create custom folders for Tools and artifacts
+  ![image](https://github.com/user-attachments/assets/31f6160b-f8eb-442f-9093-08f69f0862c8)
+- exclude the created folders in Defender, (Virus & threat protection settings)
+  ![image](https://github.com/user-attachments/assets/09f0f6e0-2b5a-48a2-bfb0-a99783f76348)
+
+## Installing Forensic Tools
+
+AIM https://arsenalrecon.com/downloads/
+KAPE https://www.kroll.com/en/services/cyber-risk/incident-response-litigation-support/kroll-artifact-parser-extractor-kape
+EZ Tools https://ericzimmerman.github.io/#!index.md
+RegRipper 3.0 https://github.com/keydet89/RegRipper3.0
+Event Log Explorer https://eventlogxp.com/
+Notepad++ https://notepad-plus-plus.org/
+
+## SIFT Setup (Optional)
+
+We can also use the `SIFT Workstation` from SANS.
 
 > The SIFT Workstation is a collection of free and open-source incident response and forensic tools designed to perform detailed digital forensic examinations in a variety of settings. 
 
