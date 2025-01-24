@@ -12,55 +12,90 @@ To create a space for exploring digital forensics and memory analysis, enabling 
    
 - You can use VMware Workstation or VirtualBox, based on your preference. More details [here](https://github.com/mmhgwyjs/homelab?tab=readme-ov-file#hypervisor).
 
-***2. Spinning up a Windows machine.***
+***2. Setting Up a Windows Machine***
 
-- you can check the steps here. https://github.com/mmhgwyjs/windows-lab?tab=readme-ov-file#initial-setup
+- Follow the steps outlined here: [Windows Lab Setup Guide](https://github.com/mmhgwyjs/windows-lab?tab=readme-ov-file#initial-setup)
 
-***3. Enabling Windows Subsystem for Linux (WSL) and Installing Ubuntu.***
+***3. Enabling Windows Subsystem for Linux (WSL) and Installing Ubuntu***
 
-for windows server
+#### For Windows Server:
+> For detailed instructions, refer to the official Microsoft guide:  
+[Install WSL on Windows Server](https://docs.microsoft.com/en-us/windows/wsl/install-on-server)
 
-https://docs.microsoft.com/en-us/windows/wsl/install-on-server
+- Open PowerShell and run the following command to enable WSL:  
+   ```powershell
+   Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+   ```
+- Restart the server.
 
-- in powershell, Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-- restart
-- download a linux distro: https://learn.microsoft.com/en-us/windows/wsl/install-manual#downloading-distributions
-- rename the downloaded .appx then extract it
-- run Add-AppxPackage .\app_name.appx
-  ![image](https://github.com/user-attachments/assets/4b07aaff-59f3-49d0-bb25-ef2d635077f5)
-- run ubuntu, wait for it to be completed
-  ![image](https://github.com/user-attachments/assets/245d2e43-02b1-4f60-9e3f-a9e155ec08f7)
-- setup username and password
+- Download a Linux distribution from the Microsoft Store: [WSL Distro Download](https://learn.microsoft.com/en-us/windows/wsl/install-manual#downloading-distributions)
 
-for windows client
+- Rename the downloaded `.appx` file and extract it.
 
-- in powershell, dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-- restart
-- open microsoft store, search Ubuntu 20.04.6 and Install
-  ![image](https://github.com/user-attachments/assets/3b1b59f3-936b-460e-9036-0cad422d34d4)
-- Open Ubuntu
-  ![image](https://github.com/user-attachments/assets/90390394-1134-4d51-ac4c-69751b29cd5f)
-- setup username and password
-  ![image](https://github.com/user-attachments/assets/254cfeba-1d2a-470d-87a8-73d2cc5a6841)
-- completed
-  ![image](https://github.com/user-attachments/assets/53ddfc0c-3cd3-41b3-9295-5756e3f8d38c)
+- Install the extracted package by running:  
+   ```powershell
+   Add-AppxPackage .\app_name.appx
+   ```
+   ![image](https://github.com/user-attachments/assets/4b07aaff-59f3-49d0-bb25-ef2d635077f5)
 
-### optional configuration
+- Run the Ubuntu distribution. Wait for the installation to complete.  
+   ![image](https://github.com/user-attachments/assets/245d2e43-02b1-4f60-9e3f-a9e155ec08f7)
 
-- set the timezone to UTC
-- create custom folders for Tools and artifacts
+- Set up a username and password for Ubuntu.
+
+#### For Windows Client:
+- Open PowerShell and run the following command to enable WSL:  
+   ```powershell
+   dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+   ```
+- Restart the machine.
+
+- Open the Microsoft Store, search for **Ubuntu 20.04.6**, and click **Install**:  
+   ![image](https://github.com/user-attachments/assets/3b1b59f3-936b-460e-9036-0cad422d34d4)
+
+- Open Ubuntu after installation:  
+   ![image](https://github.com/user-attachments/assets/90390394-1134-4d51-ac4c-69751b29cd5f)
+
+- Set up a username and password for Ubuntu:  
+   ![image](https://github.com/user-attachments/assets/254cfeba-1d2a-470d-87a8-73d2cc5a6841)
+
+- You’re all set! The installation is complete:  
+   ![image](https://github.com/user-attachments/assets/53ddfc0c-3cd3-41b3-9295-5756e3f8d38c)
+
+## Addtional Configurations
+
+***1. Set the Timezone to UTC***  
+- Change the system timezone to UTC for consistency and compatibility across environments.
+
+***2. Create Custom Folders for Tools and Artifacts***
+- Organize your system by creating dedicated folders for tools and artifacts:
+  
   ![image](https://github.com/user-attachments/assets/31f6160b-f8eb-442f-9093-08f69f0862c8)
-- exclude the created folders in Defender, (Virus & threat protection settings)
+
+***3. Exclude the Created Folders in Windows Defender***  
+- To prevent Defender from scanning your custom folders, exclude them in the **Virus & Threat Protection settings**:
+  
   ![image](https://github.com/user-attachments/assets/09f0f6e0-2b5a-48a2-bfb0-a99783f76348)
 
 ## Installing Forensic Tools
 
-AIM https://arsenalrecon.com/downloads/
-KAPE https://www.kroll.com/en/services/cyber-risk/incident-response-litigation-support/kroll-artifact-parser-extractor-kape
-EZ Tools https://ericzimmerman.github.io/#!index.md
-RegRipper 3.0 https://github.com/keydet89/RegRipper3.0
-Event Log Explorer https://eventlogxp.com/
-Notepad++ https://notepad-plus-plus.org/
+- **AIM (Arsenal Image Mounter)**: A tool for mounting forensic images.  
+  [Download AIM](https://arsenalrecon.com/downloads/)
+
+- **KAPE (Kroll Artifact Parser and Extractor)**: A powerful tool for rapid collection and parsing of forensic artifacts.  
+  [Download KAPE](https://www.kroll.com/en/services/cyber-risk/incident-response-litigation-support/kroll-artifact-parser-extractor-kape)
+
+- **EZ Tools (Eric Zimmerman's Tools)**: A collection of tools for digital forensics analysis, including extraction and parsing utilities.  
+  [Access EZ Tools](https://ericzimmerman.github.io/#!index.md)
+
+- **RegRipper 3.0**: A tool for extracting and analyzing registry data in forensic investigations.  
+  [Download RegRipper 3.0](https://github.com/keydet89/RegRipper3.0)
+
+- **Event Log Explorer**: A tool for exploring and analyzing Windows event logs.  
+  [Download Event Log Explorer](https://eventlogxp.com/)
+
+- **Notepad++**: A text editor widely used for viewing and editing log files and scripts.  
+  [Download Notepad++](https://notepad-plus-plus.org/)
 
 ## SIFT Setup (Optional)
 
@@ -88,7 +123,7 @@ We can also use the `SIFT Workstation` from SANS.
 
   ![image](https://github.com/user-attachments/assets/487c9a20-aac3-4564-9ce4-999467b4185c)
 
-## Additional Configurations 
+## Additional Configurations (SIFT)
 
 ***1. Change the default passwords.***
 
@@ -114,4 +149,6 @@ We can also use the `SIFT Workstation` from SANS.
 
 ## Lab Exercises
 
-- Coming soon
+| Exercise                          | Description                                                                                     | Link                                                                                       | Status       |
+|-----------------------------------|-------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|--------------|
+| Installing Volatility3            | Install and set up Volatility3 for memory forensics, including dependencies and usage basics.    | [View Exercise](https://github.com/mmhgwyjs/forensics-lab/blob/main/Lab%20Exercises/Volatility.md)                                                                         | In Progress  |
