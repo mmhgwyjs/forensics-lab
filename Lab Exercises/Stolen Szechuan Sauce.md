@@ -74,6 +74,12 @@ SOFTWARE\Microsoft\Windows NT\CurrentVersion
 
 ***3. What was the local time of the Server?***  
 
+`Pacific Standard Time`
+
+![image](https://github.com/user-attachments/assets/86b2ec78-0fbf-4efd-9984-baf6e69338a6)
+
+vol -f citadeldc01.mem windows.registry.printkey --key 'ControlSet001\Control\TimeZoneInformation'
+
 ***4. Was there a breach?***  
 
 ***5. What was the initial entry vector (how did they get in)?***  
