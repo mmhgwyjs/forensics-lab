@@ -4,30 +4,73 @@ Scenario: Your bedroom door bursts open, shattering your pleasant dreams. Your m
 
 Artifacts:
 **Domain Controller (DC01) Artifacts:**
+
 1. **[DC01 Memory Dump](https://dfirmadness.com/case001/DC01-memory.zip)**
-2. **[DC01 Autoruns](https://dfirmadness.com/case001/DC01-autorunsc.zip)**
-3. **[DC01 Protected Files](https://dfirmadness.com/case001/DC01-ProtectedFiles.zip)**
+   
+3. **[DC01 Autoruns](https://dfirmadness.com/case001/DC01-autorunsc.zip)**
+   
+5. **[DC01 Protected Files](https://dfirmadness.com/case001/DC01-ProtectedFiles.zip)**
 
 **Network Capture:**
+
 4. **[Case001 PCAP](https://dfirmadness.com/case001/case001-pcap.zip)**
 
 **Desktop Artifacts:**
+
 5. **[Desktop Disk Image (E01)](https://dfirmadness.com/case001/DESKTOP-E01.zip)**
+
 6. **[Desktop Memory Dump](https://dfirmadness.com/case001/DESKTOP-SDN1RPT-memory.zip)**
-7. **[Desktop Autoruns](https://dfirmadness.com/case001/DESKTOP-SDN1RPT-autorunsc.zip)**
-8. **[Desktop Protected Files](https://dfirmadness.com/case001/DESKTOP-SDN1RPT-Protected%20Files.zip)**
+   
+8. **[Desktop Autoruns](https://dfirmadness.com/case001/DESKTOP-SDN1RPT-autorunsc.zip)**
+   
+10. **[Desktop Protected Files](https://dfirmadness.com/case001/DESKTOP-SDN1RPT-Protected%20Files.zip)**
 
 
 Desktop Protected Files
 Reference: [James Smith](https://twitter.com/DFIRmadness) - [The Case of the Stolen Szechuan Sauce](https://dfirmadness.com/the-stolen-szechuan-sauce/) (with explicit permission)
 
-
-
 ### Questions 
 
 ***1. What’s the Operating System of the Server?***  
 
+`Windows Server 2012 R2 (x64), Build 9600`
+
+citadeldc01.mem
+
+using volatility, `vol -f citadeldc01.mem windows.info`
+
+![image](https://github.com/user-attachments/assets/4f53e4ce-f8a2-481f-853c-c98688a70b7f)
+
+Key Registry & Memory Values  
+| Key                             | Value                  | Meaning |
+|---------------------------------|------------------------|---------|
+| `NtMajorVersion`               | `6`                    | Major Windows version |
+| `NtMinorVersion`               | `3`                    | Minor Windows version |
+| `PE MajorOperatingSystemVersion` | `6`                  | PE file OS major version |
+| `PE MinorOperatingSystemVersion` | `3`                  | PE file OS minor version |
+| `Major/Minor`                   | `15.9600`              | Windows build version |
+| `NtProductType`                 | `NtProductLanManNt`    | Indicates a Server OS |
+
+Windows Version Mapping  
+Windows versions are identified by **(Major.Minor) version mapping**:
+
+| Major.Minor | Windows Version |
+|------------|----------------|
+| 6.0        | Windows Vista / Server 2008 |
+| 6.1        | Windows 7 / Server 2008 R2 |
+| 6.2        | Windows 8 / Server 2012 |
+| **6.3**    | **Windows 8.1 / Server 2012 R2** |
+
+Since `NtProductType = NtProductLanManNt`, it confirms this is a **Windows Server** version, specifically **Windows Server 2012 R2**.
+
 ***2. What’s the Operating System of the Desktop?***  
+Windows 10 Enterprise Evaluation
+
+![image](https://github.com/user-attachments/assets/a6a20e0d-3b92-4552-8ff3-2e884b1d3b7e)
+
+SOFTWARE\Microsoft\Windows NT\CurrentVersion
+
+20200918_0417_DESKTOP-SDN1RPT.E01
 
 ***3. What was the local time of the Server?***  
 
