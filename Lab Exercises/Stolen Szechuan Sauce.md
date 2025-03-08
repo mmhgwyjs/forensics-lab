@@ -113,9 +113,16 @@ i got error on dumping the file
 
 i cannot find the process with 2244 PID
 
+I use malfind but did not see the 3644 and 2244 process, though I am not fully sure how read the results
+
+vol -f citadeldc01.mem windows.malfind
+
+> research how to read malfind results
+
+
 ***5. What was the initial entry vector (how did they get in)?***  
 
-lets check the packet capture provided
+i am thinking extracting the winevent logs from the disk image or use the pcap provided, lets check the packet capture first
 
 ![image](https://github.com/user-attachments/assets/461c9012-4ce4-4472-ac80-7d4ea808e33f)
 
