@@ -31,9 +31,11 @@ Reference: [James Smith](https://twitter.com/DFIRmadness) - [The Case of the Sto
 
 ### Questions 
 
+> **If you are reading this, it means I have not yet finished this exercise. Please note that I will be including my thought process throughout the questions, which may lead to incorrect analysis or processes, but this is how I want to document them for now. I will also dump all artifacts I find, whether they are suspicious, malicious, or not. This will serve as my draft document.**
+
 ***1. What’s the Operating System of the Server?***  
 
-`Windows Server 2012 R2 (x64), Build 9600`
+**Answer: `Windows Server 2012 R2 (x64), Build 9600`**
 
 citadeldc01.mem
 
@@ -64,7 +66,10 @@ Windows versions are identified by **(Major.Minor) version mapping**:
 Since `NtProductType = NtProductLanManNt`, it confirms this is a **Windows Server** version, specifically **Windows Server 2012 R2**.
 
 ***2. What’s the Operating System of the Desktop?***  
-Windows 10 Enterprise Evaluation
+
+**Answer: Windows 10 Enterprise Evaluation**
+
+using FTK imager, extract the software reg hive, then use registry explorer to view
 
 ![image](https://github.com/user-attachments/assets/a6a20e0d-3b92-4552-8ff3-2e884b1d3b7e)
 
@@ -74,7 +79,7 @@ SOFTWARE\Microsoft\Windows NT\CurrentVersion
 
 ***3. What was the local time of the Server?***  
 
-`Pacific Standard Time`
+**Answer: `Pacific Standard Time`**
 
 ![image](https://github.com/user-attachments/assets/86b2ec78-0fbf-4efd-9984-baf6e69338a6)
 
@@ -82,7 +87,53 @@ vol -f citadeldc01.mem windows.registry.printkey --key 'ControlSet001\Control\Ti
 
 ***4. Was there a breach?***  
 
+Yes, for initial analysis from the mem dump
+
+vol -f citadeldc01.mem windows.psscan > psscan.txt
+
+vol -f citadeldc01.mem windows.netscan > netscan.txt
+
+found this IP: 203.78.103.109
+
+![image](https://github.com/user-attachments/assets/832f29c9-a0b2-468e-b0f9-d610f8463b9c)
+
+![image](https://github.com/user-attachments/assets/ed7e9c06-8a7e-481c-8a90-1edf49246d03)
+
+cat netscan.txt | grep -Eiv "dns|0.0.0.0|::" > to remove the noise `-E regex, -i case insensitive, -v invert the match, like do not match
+
+location, vol -f citadeldc01.mem windows.pstree --pid 3644
+
+![image](https://github.com/user-attachments/assets/5b9a7c72-603e-4d05-8177-157542595fb0)
+
+\Windows\System32\coreupdater.exe
+
+i got error on dumping the file
+
+![image](https://github.com/user-attachments/assets/4b8de77c-c510-4e98-afd1-81f1e55b2825)
+
+i cannot find the process with 2244 PID
+
 ***5. What was the initial entry vector (how did they get in)?***  
+
+lets check the packet capture provided
+
+![image](https://github.com/user-attachments/assets/461c9012-4ce4-4472-ac80-7d4ea808e33f)
+
+protocol hier
+![image](https://github.com/user-attachments/assets/a3d8ba4e-44a7-4321-a483-40e1a226735d)
+
+top talkers
+![image](https://github.com/user-attachments/assets/446a3fbd-2fdb-4dbc-9aff-cec59ef8f54a)
+
+194.61.24.102 > it is from Russia, lets note this. as we know the endpoint is in pacific time - US
+![image](https://github.com/user-attachments/assets/e6ba81aa-dba6-402d-9fba-662d12dc741a)
+
+uses port 3389 - rdp
+
+![image](https://github.com/user-attachments/assets/e5674688-11fe-4dd9-beb9-c58bd9aefdc6)
+
+1st packet = ping
+![image](https://github.com/user-attachments/assets/309c41d0-06e7-4b3e-b7ea-69f235793f9a)
 
 ***6. Was malware used? If so what was it?***  
 
